@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 	"github.com/mofodox/sena/database"
+	"github.com/mofodox/sena/routes"
 )
 
 func main() {
@@ -26,14 +27,7 @@ func main() {
 	// middlewares
 	app.Use(logger.New())
 
-	app.Get("/health", apiStatusHandler)
+	routes.SetupRoutes(app)
 
-	app.Listen(":8080")
-}
-
-func apiStatusHandler(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"error":   false,
-		"message": "Status OK",
-	})
+	log.Fatalln(app.Listen(":8080"))
 }
