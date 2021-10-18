@@ -17,7 +17,9 @@ func main() {
 	}
 
 	// Initialise the connection to the database
-	database.ConnectDB()
+	if err := database.ConnectDB(); err != nil {
+		log.Fatalf("unable to connect to the database")
+	}
 
 	app := fiber.New()
 
