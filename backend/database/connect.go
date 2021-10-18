@@ -18,7 +18,6 @@ func ConnectDB() (err error) {
 
 	DB, err = gorm.Open(postgres.Open(dsn))
 	if err != nil {
-		log.Fatalf("unable to connect to the database")
 		return err
 	}
 
